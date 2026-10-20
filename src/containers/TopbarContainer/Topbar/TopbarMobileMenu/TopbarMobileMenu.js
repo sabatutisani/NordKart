@@ -57,6 +57,29 @@ const CustomLinkComponent = ({ linkConfig, currentPage }) => {
   );
 };
 
+// Main navigation links of the Nordkart design (same as in TopbarDesktop).
+const MAIN_LINKS = [
+  { key: 'browse', name: 'SearchPage', activePages: ['SearchPage', 'SearchPageWithListingType'] },
+  { key: 'categories', name: 'LandingPage', hash: '#countries' },
+  { key: 'howItWorks', name: 'LandingPage', hash: '#how' },
+  { key: 'about', name: 'LandingPage', hash: '#about' },
+];
+
+const MainLinks = ({ currentPage }) => (
+  <ul className={css.mainLinksWrapper}>
+    {MAIN_LINKS.map(l => {
+      const isActive = !l.hash && l.activePages.includes(currentPage);
+      return (
+        <li key={l.key} className={classNames(css.mainLink, { [css.currentPage]: isActive })}>
+          <NamedLink name={l.name} to={l.hash ? { hash: l.hash } : undefined}>
+            <FormattedMessage id={`TopbarDesktop.nav.${l.key}`} />
+          </NamedLink>
+        </li>
+      );
+    })}
+  </ul>
+);
+
 /**
  * Menu for mobile layout (opens through hamburger icon)
  *
@@ -132,6 +155,7 @@ const TopbarMobileMenu = props => {
             />
           </div>
 
+          <MainLinks currentPage={currentPage} />
           <ul className={css.customLinksWrapper}>{extraLinks}</ul>
 
           <div className={css.spacer} />
@@ -192,6 +216,7 @@ const TopbarMobileMenu = props => {
             </NamedLink>
           </li>
         </ul>
+        <MainLinks currentPage={currentPage} />
         <ul className={css.customLinksWrapper}>{extraLinks}</ul>
         <div className={css.spacer} />
       </div>

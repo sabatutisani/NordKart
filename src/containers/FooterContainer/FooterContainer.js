@@ -1,33 +1,26 @@
 import React from 'react';
 import { useConfiguration } from '../../context/configurationContext';
-import loadable from '@loadable/component';
 
-const SectionBuilder = loadable(
-  () => import(/* webpackChunkName: "SectionBuilder" */ '../PageBuilder/PageBuilder'),
-  {
-    resolveComponent: components => components.SectionBuilder,
-  }
-);
+import NordkartFooter from './NordkartFooter';
 
+/**
+ * Site-wide footer.
+ *
+ * Nordkart: the footer is coded (see NordkartFooter.js) instead of being built from the hosted
+ * footer asset. Only the social media links are still read from the footer asset in Console.
+ *
+ * @component
+ * @returns {JSX.Element} footer
+ */
 const FooterComponent = () => {
   const { footer = {}, topbar } = useConfiguration();
 
-  // If footer asset is not set, let's not render Footer at all.
-  if (Object.keys(footer).length === 0) {
-    return null;
-  }
-
-  // The footer asset does not specify sectionId or sectionType. However, the SectionBuilder
-  // expects sectionId and sectionType in order to identify the section. We add those
-  // attributes here before passing the asset to SectionBuilder.
-  const footerSection = {
-    ...footer,
-    sectionId: 'footer',
-    sectionType: 'footer',
-    linkLogoToExternalSite: topbar?.logoLink,
-  };
-
-  return <SectionBuilder sections={[footerSection]} />;
+  return (
+    <NordkartFooter
+      socialMediaLinks={footer?.socialMediaLinks}
+      linkLogoToExternalSite={topbar?.logoLink}
+    />
+  );
 };
 
 // NOTE: if you want to add dynamic data to FooterComponent,

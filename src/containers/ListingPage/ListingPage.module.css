@@ -57,7 +57,7 @@
   flex-direction: column;
   width: 100%;
   color: var(--colorGrey100);
-  background-color: var(--colorGrey700);
+  background-color: var(--colorNavy);
   z-index: 1; /* bring on top of mobile image */
   padding: 0 24px;
 
@@ -239,7 +239,7 @@
 
   @media (--viewportMedium) {
     object-fit: cover;
-    border-radius: var(--borderRadius);
+    border-radius: var(--borderRadiusXLarge);
 
     &:hover {
       transform: scale(1.005);
@@ -492,7 +492,7 @@
 .title {
   /* Font */
   composes: marketplaceModalTitleStyles from global;
-  color: var(--colorGrey700);
+  color: var(--colorNavy);
 
   /* Layout */
   width: 100%;
@@ -580,7 +580,11 @@
   /* Font for sections titles */
   composes: p from global;
   padding: 0;
-  font-weight: var(--fontWeightBold);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: var(--fontWeightHeavy);
+  letter-spacing: -0.02em;
+  color: var(--colorNavy);
 
   margin-top: 0;
   margin-bottom: 12px;
@@ -731,7 +735,7 @@
   /* Static map: dimensions are 640px */
   max-width: 640px;
   max-height: 640px;
-  background-color: #eee;
+  background-color: var(--colorNavySoft);
   padding: 0;
   border: 0;
   cursor: pointer;

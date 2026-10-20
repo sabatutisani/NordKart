@@ -1,0 +1,21 @@
+@import '../../styles/customMediaQueries.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--colorWhite);
+  color: var(--colorNavy);
+  overflow-x: clip;
+}
+
+/* Scroll-reveal states (see useReveal.js) */
+.revealHidden {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.revealHidden.revealVisible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.62s var(--transitionEaseOut), transform 0.62s var(--transitionEaseOut);
+}

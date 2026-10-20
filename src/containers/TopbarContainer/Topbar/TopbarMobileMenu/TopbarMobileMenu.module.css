@@ -17,13 +17,38 @@
 }
 
 .accountLinksWrapper,
-.customLinksWrapper {
+.customLinksWrapper,
+.mainLinksWrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
+  margin: 0;
 }
 .accountLinksWrapper {
-  margin-bottom: 36px;
+  margin-bottom: 24px;
+}
+
+/* Main navigation (Browse, Categories, ...) */
+.mainLinksWrapper {
+  padding-top: 24px;
+  margin-bottom: 12px;
+  border-top: 1px solid var(--colorBorder);
+}
+
+.mainLink {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: var(--fontWeightSemiBold);
+  padding: 6px 0;
+
+  & a {
+    color: var(--colorNavy);
+  }
+
+  & a:hover {
+    color: var(--marketplaceColor);
+  }
 }
 
 .footer {
@@ -33,6 +58,7 @@
   width: 100vw;
   padding: 24px;
   background-color: var(--colorWhite);
+  border-top: 1px solid var(--colorBorder);
   box-shadow: var(--boxShadowTop);
 }
 
@@ -44,18 +70,19 @@
 
 .greeting {
   /* Font */
-  font-weight: var(--fontWeightBlack);
-  font-size: 24px;
-  line-height: 24px;
+  font-weight: var(--fontWeightHeavy);
+  letter-spacing: -0.035em;
+  color: var(--colorNavy);
+  font-size: 30px;
+  line-height: 36px;
 
-  padding: 3px 0 3px 0;
-  margin-bottom: 1px;
-  margin-top: 16px;
+  padding: 0;
+  margin-bottom: 6px;
+  margin-top: 18px;
 
   @media (--viewportMedium) {
     font-size: 40px;
-    line-height: 56px;
-    padding: 5px 0 3px 0;
+    line-height: 48px;
     /* x * 8px */
     margin-top: 24px;
   }
@@ -73,33 +100,35 @@
 
   /* Logout font is smaller and gray since the action is not recommended. */
   font-weight: var(--fontWeightSemiBold);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
 
-  color: var(--colorGrey600);
+  color: var(--colorTextMuted);
 
   /* Position component */
   width: initial;
-  margin: 4px 0 24px 0;
+  margin: 0 0 24px 0;
   padding: 0;
 
   &:hover {
-    text-decoration: underline;
+    color: var(--marketplaceColor);
+    text-decoration: none;
     cursor: pointer;
   }
 
   @media (--viewportMedium) {
-    margin: 0 0 36px 0;
+    margin: 0 0 32px 0;
   }
 }
 
 .customLinkFont {
   /* Font */
-  font-weight: var(--fontWeightBold);
-  font-size: 21px;
-  line-height: 24px;
+  font-weight: var(--fontWeightHeavy);
+  letter-spacing: -0.03em;
+  font-size: 24px;
+  line-height: 30px;
 
-  padding: 4px 0 2px 0;
+  padding: 0;
   /* x * 6px */
   margin-top: 24px;
   margin-bottom: 18px;
@@ -107,31 +136,42 @@
   @media (--viewportMedium) {
     font-size: 30px;
     line-height: 40px;
-    padding: 1px 0 7px 0;
   }
 }
 
 .inbox {
   /* Font */
   composes: customLinkFont;
-  color: var(--marketplaceColor);
+  color: var(--colorNavy);
   position: relative;
 
   margin-top: auto;
-  margin-bottom: 13px;
+  margin-bottom: 12px;
+
+  & a {
+    color: var(--colorNavy);
+  }
 }
 
 .navigationLink {
   /* Font */
   composes: customLinkFont;
-  color: var(--marketplaceColor);
+  color: var(--colorNavy);
 
   /* Layout */
   margin-top: 0;
-  margin-bottom: 11px;
+  margin-bottom: 12px;
+
+  & a {
+    color: var(--colorNavy);
+  }
+
+  & a:hover {
+    color: var(--marketplaceColor);
+  }
 }
 .currentPageLink {
-  color: var(--marketplaceColorDark);
+  color: var(--marketplaceColor);
 }
 
 .notificationBadge {
@@ -152,8 +192,10 @@
 .authenticationGreeting {
   /* Font */
   composes: h1 from global;
+  font-size: 36px;
+  line-height: 42px;
 
-  margin-bottom: 48px;
+  margin-bottom: 36px;
   margin-top: var(--TopbarMobileMenu_topMargin);
 }
 .authenticationLinks {
@@ -172,12 +214,12 @@
 }
 
 .currentPage {
-  color: var(--colorBlack);
+  color: var(--colorNavy);
 
-  /* black left border */
-  border-left: 5px solid black;
+  /* red left border */
+  border-left: 4px solid var(--marketplaceColor);
   margin-left: -24px;
-  padding-left: 19px;
+  padding-left: 20px;
 }
 
 .spacer {

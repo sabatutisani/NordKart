@@ -16,13 +16,13 @@
 
   /* Layout */
   min-width: 300px;
-  margin-top: 7px;
+  margin-top: 8px;
   background-color: var(--colorWhite);
 
   /* Borders */
-  border-top: 1px solid var(--colorGrey100);
+  border: 1px solid var(--colorBorder);
   box-shadow: var(--boxShadowPopup);
-  border-radius: var(--borderRadiusMedium);
+  border-radius: var(--borderRadiusLarge);
   transition: var(--transitionStyleButton);
 }
 

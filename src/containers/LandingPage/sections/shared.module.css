@@ -1,0 +1,117 @@
+@import '../../../styles/customMediaQueries.css';
+
+/* Shared building blocks for landing page sections */
+
+.container {
+  width: 100%;
+  max-width: var(--contentMaxWidthWide);
+  margin: 0 auto;
+  padding-left: var(--pageGutter);
+  padding-right: var(--pageGutter);
+}
+
+.sectionSpacing {
+  padding-top: clamp(72px, 10vw, 128px);
+}
+
+.eyebrow {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: var(--fontWeightBold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--marketplaceColor);
+}
+
+.sectionTitle {
+  margin: 0;
+  padding: 0;
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.04;
+  font-weight: var(--fontWeightHeavy);
+  letter-spacing: -0.035em;
+  color: var(--colorNavy);
+  text-wrap: balance;
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.arrowLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: var(--fontWeightSemiBold);
+  color: var(--colorNavy);
+  transition: color 0.2s, gap 0.2s;
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+    gap: 12px;
+  }
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 58px;
+  padding: 0 28px;
+  border-radius: 13px;
+  border: 0;
+  background-color: var(--marketplaceColor);
+  color: var(--colorWhite);
+  font-size: 16px;
+  font-weight: var(--fontWeightBold);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.15s, background-color 0.2s, gap 0.2s;
+
+  &:hover {
+    background-color: var(--marketplaceColorDark);
+    color: var(--colorWhite);
+    text-decoration: none;
+    gap: 14px;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.ctaButtonOutlineLight {
+  composes: ctaButton;
+  background-color: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--colorWhite);
+  }
+}
+
+/* Horizontal snap-scroll row (used on smaller screens) */
+.snapRow {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin: 0 calc(-1 * var(--pageGutter));
+  padding: 4px var(--pageGutter) 12px;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & > * {
+    scroll-snap-align: start;
+  }
+}

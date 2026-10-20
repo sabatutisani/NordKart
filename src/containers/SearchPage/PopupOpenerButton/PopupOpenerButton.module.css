@@ -4,20 +4,20 @@
 .labelSelected {
   display: inline-block;
   width: auto;
-  height: 35px;
-  min-height: 35px;
+  height: 36px;
+  min-height: 36px;
 
-  padding: 0 18px;
-  margin: 0 9px 0 0;
+  padding: 0 16px;
+  margin: 0 8px 0 0;
 
   transition: all var(--transitionStyleButton);
   cursor: pointer;
 
   /* Font */
   font-weight: var(--fontWeightSemiBold);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 18px;
-  letter-spacing: 0.2px;
+  letter-spacing: 0;
 
   /* Button text styles */
   /* Default button text is centered without decorations */
@@ -27,7 +27,6 @@
   &:focus,
   &:hover {
     outline: none;
-    box-shadow: var(--boxShadowFilterButton);
     text-decoration: none;
   }
 
@@ -37,52 +36,47 @@
   }
 
   @media (--viewportMedium) {
-    height: auto;
-    min-height: 0;
-    padding: var(--marketplaceButtonSmallDesktopPadding);
+    height: 40px;
+    min-height: 40px;
+    padding: 0 16px;
     margin: 0;
 
-    font-weight: var(--fontWeightMedium);
-    font-size: 13px;
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 14px;
     line-height: 20px;
   }
 }
 
 .label {
   /* Button borders */
-  border: 1px solid var(--colorGrey100);
-  border-radius: var(--borderRadiusMedium);
+  border: 1px solid var(--colorBorderInput);
+  border-radius: var(--borderRadius);
 
   background-color: var(--colorWhite);
+  color: var(--colorNavy);
 
   &:hover,
   &:focus {
-    border-color: var(--colorGrey300);
+    border-color: var(--colorNavy);
   }
   &:disabled {
     border-color: var(--colorGrey100);
-  }
-
-  @media (--viewportMedium) {
-    &:hover,
-    &:focus {
-      border-color: transparent;
-    }
   }
 }
 
 .labelSelected {
   /* Button borders */
-  border-radius: var(--borderRadiusMedium);
-  border: 1px solid var(--marketplaceColor);
+  border-radius: var(--borderRadius);
+  border: 1px solid var(--colorNavy);
 
-  /* Button colors: secondary */
-  background-color: var(--marketplaceColor);
+  /* Selected chip: navy */
+  background-color: var(--colorNavy);
   color: var(--colorWhite);
 
   &:hover,
   &:focus {
-    border: 1px solid var(--marketplaceColorDark);
+    border: 1px solid var(--colorNavy);
+    background-color: var(--colorGrey800);
   }
   &:disabled {
     background-color: var(--colorGrey100);

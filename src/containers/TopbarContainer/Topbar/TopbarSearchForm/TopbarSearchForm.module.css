@@ -15,7 +15,7 @@
   display: flex;
   width: 24px;
   align-self: stretch;
-  background-color: var(--colorWhite);
+  background-color: transparent;
 
   @media (--viewportMedium) {
     margin-left: 0;
@@ -23,7 +23,9 @@
 }
 
 .fontInput {
-  font-weight: var(--fontWeightBlack);
+  font-weight: var(--fontWeightHeavy);
+  letter-spacing: -0.03em;
+  color: var(--colorNavy);
   font-size: 24px;
   line-height: 24px;
 
@@ -65,22 +67,28 @@
 }
 
 .desktopIcon {
-  height: var(--topbarHeightDesktop);
+  height: 100%;
   border: none;
-  padding-top: 2px;
+  padding-top: 0;
 
   display: flex;
-  width: 24px;
+  align-items: center;
+  width: 22px;
   align-self: stretch;
-  background-color: var(--colorWhite);
+  background-color: transparent;
 }
 
 .desktopInput {
   composes: p from global;
   flex-grow: 1;
   /* Font */
-  height: var(--topbarHeightDesktop);
+  height: 100%;
+  min-height: 40px;
   line-height: unset;
+  font-size: 15px;
+  font-weight: var(--fontWeightMedium);
+  color: var(--colorNavy);
+  background-color: transparent;
   border: none;
   padding-top: 0;
   padding-bottom: 0;
@@ -103,7 +111,7 @@
 
   &:hover::placeholder,
   &:focus::placeholder {
-    color: var(--colorGrey700);
+    color: var(--colorTextMuted);
   }
 
   /* Placeholder text might be too wide */
@@ -126,7 +134,7 @@
   /* searchContainer margin-top (94px) + mobileInput height (50px) = 144px */
   min-height: calc(100vh - 144px);
   width: 100%;
-  background-color: var(--marketplaceColor);
+  background-color: var(--colorNavy);
   border-bottom-left-radius: var(--borderRadius);
   border-bottom-right-radius: var(--borderRadius);
   box-shadow: var(--boxShadowPopup);
@@ -151,9 +159,10 @@
 .desktopPredictions {
   position: absolute;
   width: 100%;
-  top: var(--topbarHeightDesktop);
+  top: calc(100% + 8px);
   left: 0;
-  background-color: var(--marketplaceColor);
+  background-color: var(--colorNavy);
+  border-radius: var(--borderRadiusMedium);
   border-bottom-left-radius: var(--borderRadius);
   border-bottom-right-radius: var(--borderRadius);
   box-shadow: var(--boxShadowPopup);
@@ -169,6 +178,7 @@
 .keywordSearchWrapper {
   position: relative;
   display: flex;
+  align-items: center;
 }
 
 .searchSubmit {
@@ -176,13 +186,16 @@
   border: 0;
   padding: 0;
   cursor: pointer;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
 
   &:hover,
   &:focus {
     outline: none;
 
     & .iconSvgGroup {
-      stroke: var(--colorGrey700);
+      stroke: var(--marketplaceColor);
     }
   }
 
@@ -201,8 +214,7 @@
   display: flex;
   width: 24px;
   align-self: stretch;
-  border-bottom: 2px solid var(--marketplaceColor);
-  background-color: var(--colorWhite);
+  background-color: transparent;
 }
 
 .iconSvg {
@@ -210,7 +222,7 @@
 }
 
 .iconSvgGroup {
-  stroke: var(--marketplaceColor);
+  stroke: var(--colorNavy);
   stroke-width: 2.5px;
 
   @media (--viewportMedium) {

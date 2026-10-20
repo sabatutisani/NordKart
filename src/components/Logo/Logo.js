@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useConfiguration } from '../../context/configurationContext';
 import { ResponsiveImage } from '../../components/';
 
+import BrandLogo from './BrandLogo';
 import css from './Logo.module.css';
 
 const HEIGHT_24 = 24;
@@ -43,11 +44,21 @@ export const LogoComponent = props => {
     logoImageDesktop,
     logoImageMobile,
     logoSettings,
+    useHostedLogo,
     ...rest
   } = props;
 
   const hasValidLogoSettings = isValidLogoSettings(logoSettings);
   const logoClasses = className || css.root;
+
+  // Nordkart: the coded brand logo is used unless useHostedLogo is enabled in configBranding.js
+  if (!useHostedLogo) {
+    return (
+      <div className={logoClasses}>
+        <BrandLogo marketplaceName={marketplaceName} />
+      </div>
+    );
+  }
   const logoImageClasses = classNames(
     logoImageClassName || css.logo,
     getHeightClassName(logoSettings?.height)
@@ -124,7 +135,7 @@ const Logo = props => {
   const config = useConfiguration();
   const { layout = 'desktop', ...rest } = props;
   // NOTE: logo images are set in hosted branding.json asset or src/config/brandingConfig.js
-  const { logoImageDesktop, logoImageMobile, logoSettings } = config.branding;
+  const { logoImageDesktop, logoImageMobile, logoSettings, useHostedLogo } = config.branding;
 
   return (
     <LogoComponent
@@ -133,6 +144,7 @@ const Logo = props => {
       logoImageDesktop={logoImageDesktop}
       logoImageMobile={logoImageMobile}
       logoSettings={logoSettings}
+      useHostedLogo={useHostedLogo}
       marketplaceName={config.marketplaceName}
     />
   );

@@ -223,7 +223,7 @@ describe('ListingPage variants', () => {
     const listingRouteConfig = routeConfiguration.find(conf => conf.name === 'ListingPage');
     const ListingPage = listingRouteConfig.component;
 
-    const { getByPlaceholderText, getByRole, queryAllByRole, getByText } = render(
+    const { getByRole, queryAllByRole, getByText } = render(
       <ListingPage {...props} />,
       {
         initialState,
@@ -233,9 +233,10 @@ describe('ListingPage variants', () => {
     );
 
     await waitFor(() => {
-      // Has main search in Topbar and it's a location search.
-      expect(getByPlaceholderText('TopbarSearchForm.placeholder')).toBeInTheDocument();
-      expect(screen.getByTestId('location-search')).toBeInTheDocument();
+      // Has main search toggle in Topbar (Nordkart: the search form opens from an icon button)
+      expect(
+        screen.getByRole('button', { name: 'TopbarDesktop.screenreader.search' })
+      ).toBeInTheDocument();
 
       // Has hero (coverPhoto) section
       expect(screen.getByTestId('hero')).toBeInTheDocument();
@@ -279,7 +280,7 @@ describe('ListingPage variants', () => {
     const listingRouteConfig = routeConfiguration.find(conf => conf.name === 'ListingPage');
     const ListingPage = listingRouteConfig.component;
 
-    const { getByPlaceholderText, getByRole, queryAllByRole, getByText } = render(
+    const { getByRole, queryAllByRole, getByText } = render(
       <ListingPage {...props} />,
       {
         initialState,
@@ -288,9 +289,10 @@ describe('ListingPage variants', () => {
       }
     );
     await waitFor(() => {
-      // Has main search in Topbar and it's a location search.
-      expect(getByPlaceholderText('TopbarSearchForm.placeholder')).toBeInTheDocument();
-      expect(screen.getByTestId('location-search')).toBeInTheDocument();
+      // Has main search toggle in Topbar (Nordkart: the search form opens from an icon button)
+      expect(
+        screen.getByRole('button', { name: 'TopbarDesktop.screenreader.search' })
+      ).toBeInTheDocument();
 
       // Does not have hero (coverPhoto) section on carousel mode
       expect(screen.getByTestId('carousel')).toBeInTheDocument();

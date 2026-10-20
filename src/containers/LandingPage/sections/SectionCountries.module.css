@@ -1,0 +1,166 @@
+@import '../../../styles/customMediaQueries.css';
+
+.root {
+  composes: container sectionSpacing from './shared.module.css';
+}
+
+.titleGroup {
+  composes: titleGroup from './shared.module.css';
+  margin-bottom: 36px;
+}
+
+.eyebrow {
+  composes: eyebrow from './shared.module.css';
+}
+
+.sectionTitle {
+  composes: sectionTitle from './shared.module.css';
+}
+
+.cards {
+  composes: snapRow from './shared.module.css';
+  gap: 14px;
+  padding-bottom: 8px;
+  list-style: none;
+
+  @media (--viewportLarge) {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.cardItem {
+  flex: 0 0 min(300px, 72%);
+  margin: 0;
+  padding: 0;
+
+  @media (--viewportLarge) {
+    flex: initial;
+  }
+}
+
+.card {
+  position: relative;
+  display: block;
+  height: 380px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #dce3ec;
+  color: var(--colorWhite);
+
+  @media (--viewportMedium) {
+    height: 460px;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: var(--colorWhite);
+  }
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.7s var(--transitionEaseOut);
+
+  .card:hover &,
+  .card:focus-visible & {
+    transform: scale(1.07);
+  }
+}
+
+.gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 29, 58, 0) 35%, rgba(7, 29, 58, 0.82) 100%);
+  pointer-events: none;
+}
+
+.dim {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(7, 29, 58, 0.38);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+
+  .card:hover &,
+  .card:focus-visible & {
+    opacity: 1;
+  }
+}
+
+.info {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.nameRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.name {
+  font-size: 28px;
+  line-height: 1;
+  font-weight: var(--fontWeightHeavy);
+  letter-spacing: -0.03em;
+  transform-origin: left bottom;
+  transition: transform 0.35s var(--transitionEaseOut);
+
+  .card:hover & {
+    transform: scale(1.08);
+  }
+}
+
+.arrow {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.18);
+  transform: translateX(-6px);
+  transition: transform 0.35s var(--transitionEaseOut), background-color 0.25s;
+
+  .card:hover &,
+  .card:focus-visible & {
+    background-color: var(--marketplaceColor);
+    transform: translateX(0);
+  }
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: var(--fontWeightMedium);
+  color: #e6ebf2;
+  max-height: 44px;
+  overflow: hidden;
+  transition: max-height 0.35s var(--transitionEaseOut), opacity 0.3s;
+
+  /* On devices with hover, the description is revealed on hover */
+  @media (hover: hover) {
+    max-height: 0;
+    opacity: 0;
+
+    .card:hover &,
+    .card:focus-visible & {
+      max-height: 44px;
+      opacity: 1;
+    }
+  }
+}

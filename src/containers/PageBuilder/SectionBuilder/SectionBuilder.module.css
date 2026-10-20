@@ -135,19 +135,25 @@
 .ctaButton {
   composes: align;
   display: inline-block;
-  padding: 8px 20px;
-  font-size: 15px;
+  padding: 16px 28px;
+  font-size: 16px;
+  line-height: 24px;
   background-color: var(--marketplaceColor);
-  border-radius: 4px;
+  border-radius: 13px;
   color: white;
   text-decoration: none;
-  box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
-  font-weight: 500;
+  font-weight: var(--fontWeightBold);
   margin-top: 24px;
+  transition: transform 0.15s, background-color 0.2s;
 
   &:hover {
     text-decoration: none;
+    color: white;
     background-color: var(--marketplaceColorDark);
+  }
+
+  &:active {
+    transform: scale(0.97);
   }
 }
 

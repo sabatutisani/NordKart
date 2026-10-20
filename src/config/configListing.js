@@ -53,6 +53,39 @@
  *   - requiredMessage (optional):    Message for those fields, which are mandatory.
  */
 export const listingFields = [
+  // Nordkart: the 'country' listing field is used by the landing page (country tabs and cards),
+  // the footer's country links and the flag badge on listing cards (query: pub_country=fi).
+  // NOTE: hosted listing fields override this local config. Create the same field in
+  //       Console (Listings > Listing fields) with these exact option values: fi, se, no, dk, ge.
+  {
+    key: 'country',
+    scope: 'public',
+    schemaType: 'enum',
+    enumOptions: [
+      { option: 'fi', label: 'Finland' },
+      { option: 'se', label: 'Sweden' },
+      { option: 'no', label: 'Norway' },
+      { option: 'dk', label: 'Denmark' },
+      { option: 'ge', label: 'Georgia' },
+    ],
+    filterConfig: {
+      indexForSearch: true,
+      showFilter: true,
+      filterType: 'SelectSingleFilter',
+      label: 'Country',
+      group: 'primary',
+    },
+    showConfig: {
+      label: 'Country',
+      isDetail: true,
+    },
+    saveConfig: {
+      label: 'Country',
+      placeholderMessage: 'Select the country the product ships from…',
+      isRequired: true,
+      requiredMessage: 'You need to select a country.',
+    },
+  },
   // {
   //   "scope": "public",
   //   "label": "Gears",

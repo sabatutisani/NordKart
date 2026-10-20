@@ -290,6 +290,7 @@ const getSearchParams = config => {
       'publicData.transactionProcessAlias',
       'publicData.unitType',
       'publicData.cardStyle',
+      'publicData.country',
       // These help rendering of 'purchase' listings,
       // when transitioning from search page to listing page
       'publicData.pickupEnabled',

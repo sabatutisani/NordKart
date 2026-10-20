@@ -6,6 +6,25 @@
   /* Top Bar's drop shadow should always be visible */
   z-index: var(--zIndexTopbar);
   position: relative;
+
+  /* The background is drawn by a pseudo element, so that backdrop-filter
+     doesn't create a containing block for position: fixed children. */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--colorWhite);
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+}
+
+.scrolled::before {
+  background-color: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom-color: rgba(7, 29, 58, 0.08);
 }
 
 /* Skip to main content link - visually hidden until focused */
@@ -49,14 +68,14 @@
   justify-content: space-between;
   align-items: center;
 
-  /* fill */
-  background-color: var(--colorWhite);
+  padding: 0 8px;
 
-  /* shadows */
-  box-shadow: var(--boxShadow);
+  /* Background comes from .root (blurred on scroll) */
+  background-color: transparent;
 
   @media (--viewportMedium) {
     height: var(--topbarHeightDesktop);
+    padding: 0 16px;
   }
 
   @media (--viewportLarge) {
@@ -73,13 +92,18 @@
 .searchMenu {
   /* Font */
   composes: h5 from global;
-  color: var(--colorGrey700);
+  color: var(--colorNavy);
 
   /* Layout */
   display: flex;
-  width: 66px;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  min-height: 42px;
   margin: 0;
   border-width: 0px;
+  border-radius: var(--borderRadius);
   background-color: transparent;
 
   /* Hovers */
@@ -88,8 +112,9 @@
   }
   &:enabled:hover,
   &:enabled:active {
-    background-color: transparent;
+    background-color: #eef2f7;
     box-shadow: none;
+    transform: none;
   }
   &:disabled {
     background-color: transparent;
@@ -98,24 +123,16 @@
 }
 
 .menu {
-  padding: 15px 24px;
+  padding: 0;
   position: relative;
-
-  @media (--viewportMedium) {
-    padding: 21px 24px;
-  }
 }
 .searchMenu {
-  padding: 12px 24px;
-
-  @media (--viewportMedium) {
-    padding: 18px 24px;
-  }
+  padding: 0;
 }
 
 .menuIcon,
 .searchMenuIcon {
-  margin: 9px 0;
+  margin: 0;
 }
 
 .notificationDot {
@@ -126,11 +143,11 @@
 
   /* Position */
   position: absolute;
-  top: 17px;
-  right: 17px;
+  top: 6px;
+  right: 6px;
 
   /* Style: red dot with white border */
-  background-color: var(--colorFail);
+  background-color: var(--marketplaceColor);
   border: 2px solid var(--colorWhite);
 
   animation-name: notificationPop;
@@ -141,10 +158,6 @@
   animation-timing-function: ease-in;
   opacity: 0;
   transform: scale(0);
-
-  @media (--viewportMedium) {
-    top: 23px;
-  }
 }
 
 @keyframes notificationPop {
@@ -168,10 +181,10 @@
 
 /* Icon component styles */
 .rootMenuIcon {
-  fill: var(--colorGrey700);
+  fill: var(--colorNavy);
 }
 .rootSearchIcon {
-  stroke: var(--colorGrey700);
+  stroke: var(--colorNavy);
 }
 
 .searchContainer {

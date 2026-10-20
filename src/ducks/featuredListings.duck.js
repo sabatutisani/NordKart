@@ -63,6 +63,7 @@ const fetchFeaturedListingsPayloadCreator = async (arg, thunkAPI) => {
           'publicData.transactionProcessAlias',
           'publicData.unitType',
           'publicData.cardStyle',
+          'publicData.country',
           'publicData.pickupEnabled',
           'publicData.shippingEnabled',
           'publicData.priceVariationsEnabled',

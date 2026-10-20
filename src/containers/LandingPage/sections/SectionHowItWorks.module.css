@@ -1,0 +1,243 @@
+@import '../../../styles/customMediaQueries.css';
+
+.root {
+  margin-top: clamp(72px, 10vw, 128px);
+  background-color: var(--colorNavySoft);
+}
+
+.content {
+  composes: container from './shared.module.css';
+  padding-top: clamp(72px, 9vw, 112px);
+  padding-bottom: clamp(72px, 9vw, 112px);
+}
+
+.titleGroup {
+  composes: titleGroup from './shared.module.css';
+  max-width: 640px;
+  margin-bottom: 48px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 56px;
+  }
+}
+
+.eyebrow {
+  composes: eyebrow from './shared.module.css';
+}
+
+.sectionTitle {
+  composes: sectionTitle from './shared.module.css';
+}
+
+.stepsWrapper {
+  position: relative;
+}
+
+/* Steps: vertical on mobile, horizontal from 768px */
+.steps {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media (--viewportMedium) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+}
+
+.step {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+
+  @media (--viewportMedium) {
+    flex-direction: column;
+  }
+}
+
+.node {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: var(--fontWeightHeavy);
+  background-color: var(--colorWhite);
+  color: var(--colorNavy);
+  border: 1.5px solid var(--colorGrey200);
+}
+
+.nodeLast {
+  background-color: var(--marketplaceColor);
+  color: var(--colorWhite);
+  border-color: var(--marketplaceColor);
+}
+
+.stepText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 6px;
+}
+
+.stepTitle {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: var(--fontWeightBold);
+  letter-spacing: -0.02em;
+  color: var(--colorNavy);
+}
+
+.stepDescription {
+  margin: 0;
+  padding: 0;
+  max-width: 260px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--colorTextMuted);
+}
+
+/* Route line between steps */
+.lineBase,
+.lineMarch {
+  position: absolute;
+  left: 27px;
+  top: 28px;
+  bottom: 28px;
+  width: 2px;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+
+  @media (--viewportMedium) {
+    left: 28px;
+    right: 0;
+    top: 27px;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+  }
+}
+
+.lineBase {
+  background-color: var(--colorGrey200);
+}
+
+.lineMarch {
+  background-image: repeating-linear-gradient(
+    180deg,
+    var(--marketplaceColor) 0 10px,
+    transparent 10px 20px
+  );
+  animation: marchY 0.9s linear infinite;
+
+  @media (--viewportMedium) {
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--marketplaceColor) 0 10px,
+      transparent 10px 20px
+    );
+    animation-name: marchX;
+  }
+}
+
+.lineDot {
+  position: absolute;
+  z-index: 1;
+  left: 23px;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--marketplaceColor);
+  box-shadow: 0 0 0 5px rgba(245, 34, 58, 0.15);
+  pointer-events: none;
+  animation: travelY 6.5s ease-in-out infinite;
+
+  @media (--viewportMedium) {
+    left: 0;
+    top: 23px;
+    animation-name: travelX;
+  }
+}
+
+@keyframes marchY {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 20px;
+  }
+}
+
+@keyframes marchX {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 20px 0;
+  }
+}
+
+@keyframes travelY {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes travelX {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lineMarch,
+  .lineDot {
+    animation: none;
+  }
+
+  .lineDot {
+    display: none;
+  }
+}

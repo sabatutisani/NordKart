@@ -22,13 +22,60 @@ import css from './TopbarDesktop.module.css';
 
 const SignupLink = () => {
   return (
-    <NamedLink id="signup-link" name="SignupPage" className={css.topbarLink}>
-      <span className={css.topbarLinkLabel}>
-        <FormattedMessage id="TopbarDesktop.signup" />
-      </span>
+    <NamedLink id="signup-link" name="SignupPage" className={css.signupButton}>
+      <FormattedMessage id="TopbarDesktop.signup" />
     </NamedLink>
   );
 };
+
+// Main navigation links of the Nordkart design.
+// Links with 'hash' point to sections of the landing page.
+const NAV_LINKS = [
+  { key: 'browse', name: 'SearchPage', activePages: ['SearchPage', 'SearchPageWithListingType'] },
+  { key: 'categories', name: 'LandingPage', hash: '#countries' },
+  { key: 'howItWorks', name: 'LandingPage', hash: '#how' },
+  { key: 'sell', name: 'NewListingPage', requiresCreateListingLink: true },
+  { key: 'about', name: 'LandingPage', hash: '#about' },
+];
+
+const MainNavLinks = ({ currentPage, showCreateListingsLink }) => {
+  const links = NAV_LINKS.filter(l => !l.requiresCreateListingLink || showCreateListingsLink);
+  return (
+    <ul className={css.navLinks}>
+      {links.map(l => {
+        const isActive = !l.hash && (l.activePages || [l.name]).includes(currentPage);
+        return (
+          <li key={l.key} className={css.navLinkItem}>
+            <NamedLink
+              name={l.name}
+              to={l.hash ? { hash: l.hash } : undefined}
+              className={classNames(css.navLink, { [css.navLinkActive]: isActive })}
+            >
+              <FormattedMessage id={`TopbarDesktop.nav.${l.key}`} />
+            </NamedLink>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+const SearchToggleIcon = ({ isOpen }) =>
+  isOpen ? (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M6 6l12 12M18 6L6 18"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  ) : (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M20 20l-4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
 
 const LoginLink = () => {
   return (
@@ -41,7 +88,7 @@ const LoginLink = () => {
 };
 
 const InboxLink = ({ notificationCount, inboxTab }) => {
-  const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
+  const notificationDot = notificationCount > 0 ? <span className={css.notificationDot} /> : null;
   return (
     <NamedLink
       id="inbox-link"
@@ -155,6 +202,9 @@ const TopbarDesktop = props => {
     inboxTab,
   } = props;
   const [mounted, setMounted] = useState(false);
+  const isSearchPage = ['SearchPage', 'SearchPageWithListingType'].includes(currentPage);
+  // On search pages, the search form is open by default so that the current query is visible.
+  const [isSearchOpen, setSearchOpen] = useState(isSearchPage);
 
   useEffect(() => {
     setMounted(true);
@@ -170,7 +220,7 @@ const TopbarDesktop = props => {
     ? showCreateListingsLink
     : showCreateListingLinkForUser(config, null);
 
-  const giveSpaceForSearch = customLinks == null || customLinks?.length === 0;
+  const hasCustomLinks = customLinks?.length > 0;
   const classes = classNames(rootClassName || css.root, className);
 
   const inboxLinkMaybe = authenticatedOnClientSide ? (
@@ -190,21 +240,46 @@ const TopbarDesktop = props => {
   const signupLinkMaybe = isAuthenticatedOrJustHydrated ? null : <SignupLink />;
   const loginLinkMaybe = isAuthenticatedOrJustHydrated ? null : <LoginLink />;
 
-  const searchFormMaybe = showSearchForm ? (
+  const showSearch = showSearchForm && isSearchOpen;
+  const searchFormMaybe = showSearch ? (
     <TopbarSearchForm
-      className={classNames(css.searchLink, { [css.takeAvailableSpace]: giveSpaceForSearch })}
-      desktopInputRoot={css.topbarSearchWithLeftPadding}
+      className={css.searchForm}
+      desktopInputRoot={css.searchInputRoot}
       onSubmit={onSearchSubmit}
       initialValues={initialSearchFormValues}
       appConfig={config}
     />
-  ) : (
-    <div
-      className={classNames(css.spacer, css.topbarSearchWithLeftPadding, {
-        [css.takeAvailableSpace]: giveSpaceForSearch,
+  ) : null;
+
+  const searchToggleMaybe = showSearchForm ? (
+    <button
+      type="button"
+      className={css.iconButton}
+      onClick={() => setSearchOpen(open => !open)}
+      aria-expanded={isSearchOpen}
+      aria-label={intl.formatMessage({
+        id: isSearchOpen
+          ? 'TopbarDesktop.screenreader.closeSearch'
+          : 'TopbarDesktop.screenreader.search',
       })}
-    />
-  );
+    >
+      <SearchToggleIcon isOpen={isSearchOpen} />
+    </button>
+  ) : null;
+
+  // Hosted custom links (Console > Top bar) are shown after the main navigation, when there's space.
+  const customLinksMaybe =
+    hasCustomLinks && !showSearch ? (
+      <CustomLinksMenu
+        currentPage={currentPage}
+        customLinks={customLinks}
+        intl={intl}
+        hasClientSideContentReady={authenticatedOnClientSide || !isAuthenticatedOrJustHydrated}
+        showCreateListingsLink={false}
+      />
+    ) : (
+      <div className={css.spacer} />
+    );
 
   return (
     <nav
@@ -213,25 +288,28 @@ const TopbarDesktop = props => {
     >
       <LinkedLogo
         id="logo-topbar-desktop"
-        className={css.logoLink}
+        rootClassName={css.logoLink}
         layout="desktop"
         alt={intl.formatMessage({ id: 'TopbarDesktop.logo' }, { marketplaceName })}
         linkToExternalSite={config?.topbar?.logoLink}
       />
-      {searchFormMaybe}
 
-      <CustomLinksMenu
-        currentPage={currentPage}
-        customLinks={customLinks}
-        intl={intl}
-        hasClientSideContentReady={authenticatedOnClientSide || !isAuthenticatedOrJustHydrated}
-        showCreateListingsLink={showCreateListingsLinkHydrationSafe}
-      />
+      {showSearch ? (
+        searchFormMaybe
+      ) : (
+        <MainNavLinks
+          currentPage={currentPage}
+          showCreateListingsLink={showCreateListingsLinkHydrationSafe}
+        />
+      )}
 
+      {customLinksMaybe}
+
+      {searchToggleMaybe}
       {inboxLinkMaybe}
       {profileMenuMaybe}
-      {signupLinkMaybe}
       {loginLinkMaybe}
+      {signupLinkMaybe}
     </nav>
   );
 };

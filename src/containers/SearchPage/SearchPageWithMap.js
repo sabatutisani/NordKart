@@ -321,7 +321,11 @@ export class SearchPageComponent extends Component {
         title={title}
         schema={schema}
       >
-        <TopbarContainer rootClassName={topbarClasses} currentSearchParams={validQueryParams} />
+        <TopbarContainer
+          rootClassName={topbarClasses}
+          currentPage="SearchPage"
+          currentSearchParams={validQueryParams}
+        />
         <div id="main-content" className={css.container} role="main">
           <div className={css.searchResultContainer}>
             <SearchFiltersMobile

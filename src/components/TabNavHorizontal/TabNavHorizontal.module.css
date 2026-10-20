@@ -64,7 +64,7 @@
 }
 
 .selectedTabContent {
-  border-bottom-color: var(--colorBlack);
+  border-bottom-color: var(--marketplaceColor);
   color: var(--colorBlack);
 }
 

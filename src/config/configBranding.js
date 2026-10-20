@@ -11,14 +11,20 @@ import twitterImage from '../assets/biketribe-twitter-sharing-600x314.jpg';
 // and in components.                                  //
 /////////////////////////////////////////////////////////
 
-// Note: These come from the branding asset nowadays by default.
-//       To use this built-in configuration, you need to remove the overwrite from configHelper.js (mergeBranding func)
+// Nordkart: the colors below are locked in code (see mergeBranding in src/util/configHelpers.js).
+//           Marketplace colors set in Console are ignored. Logos and images still come from Console.
 
-// Marketplace color.
+// Marketplace color (Nordkart red).
 // This is saved as CSS Property: --marketplaceColor in src/app.js
-// Also --marketplaceColorDark and --marketplaceColorLight are generated from this one
-// by adding +/- 10% to lightness.
-export const marketplaceColor = '#7c3aed';
+// --marketplaceColorDark and --marketplaceColorLight are used for hover and accent states.
+export const marketplaceColor = '#F5223A';
+export const marketplaceColorDark = '#E01730';
+export const marketplaceColorLight = '#FF6B7C';
+
+// Fill color for <PrimaryButton>
+export const colorPrimaryButton = '#F5223A';
+export const colorPrimaryButtonDark = '#E01730';
+export const colorPrimaryButtonLight = '#FF6B7C';
 
 // Logo is used in Topbar on mobile and desktop, where height is the limiting factor.
 // Therefore, we strongly suggest that your image file for desktop logo is in landscape!
@@ -28,6 +34,10 @@ export const marketplaceColor = '#7c3aed';
 // The default images are meant for retina displays and are therefore twice as big in actual dimensions
 export const logoImageDesktopURL = logoImageDesktop;
 export const logoImageMobileURL = logoImageMobile;
+
+// Nordkart: by default the coded Nordkart logo (src/components/Logo/BrandLogo.js) is shown.
+// Set this to true to use the logo image uploaded in Console (or the images above) instead.
+export const useHostedLogo = false;
 
 // The _logoSettings_ settings for the logo. Due to constraints in current Topbar, we only support 3 height variants
 // at this point. There could be more height variants in the future and potentially other logo formats than 'image'.

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import appSettings from '../../../config/settings';
@@ -15,6 +15,7 @@ import {
   IconArrowHead,
   LimitedAccessBanner,
   LinkedLogo,
+  MobileBottomNav,
   Modal,
   ModalMissingInformation,
 } from '../../../components';
@@ -36,6 +37,21 @@ const SEARCH_DISPLAY_NOT_LANDING_PAGE = 'notLandingPage';
 const SEARCH_DISPLAY_ONLY_SEARCH_PAGE = 'onlySearchPage';
 const MOBILE_MENU_BUTTON_ID = 'mobileMenuButton';
 const MOBILE_SEARCH_BUTTON_ID = 'mobileSearchButton';
+
+// Pages that have their own fixed bottom bar (or a focused flow) don't show the mobile bottom nav.
+const PAGES_WITHOUT_MOBILE_BOTTOM_NAV = [
+  'ListingPage',
+  'ListingPageVariant',
+  'ListingPageCanonical',
+  'CheckoutPage',
+  'MakeOfferPage',
+  'RequestQuotePage',
+  'OrderDetailsPage',
+  'SaleDetailsPage',
+  'NewListingPage',
+  'EditListingPage',
+  'EditListingStripeOnboardingPage',
+];
 
 const redirectToURLWithModalState = (history, location, modalStateParam) => {
   const { pathname, search, state } = location;
@@ -240,6 +256,17 @@ const TopbarComponent = props => {
 
   const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
 
+  // Nordkart: the topbar gets a blurred, translucent background once the page is scrolled.
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+    const onScroll = () => setIsScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const hasMatchMedia = typeof window !== 'undefined' && window?.matchMedia;
   const isMobileLayout = hasMatchMedia
     ? window.matchMedia(`(max-width: ${MAX_MOBILE_SCREEN_WIDTH}px)`)?.matches
@@ -280,7 +307,9 @@ const TopbarComponent = props => {
   };
   const initialSearchFormValues = topbarSearcInitialValues();
 
-  const classes = classNames(rootClassName || css.root, className);
+  const classes = classNames(rootClassName || css.root, className, {
+    [css.scrolled]: isScrolled,
+  });
 
   const { display: searchFormDisplay = SEARCH_DISPLAY_ALWAYS } = config?.topbar?.searchBar || {};
 
@@ -295,6 +324,8 @@ const TopbarComponent = props => {
 
   const showSearchForm =
     showSearchOnAllPages || showSearchOnSearchPage || showSearchNotOnLandingPage;
+
+  const showMobileBottomNav = !PAGES_WITHOUT_MOBILE_BOTTOM_NAV.includes(resolvedCurrentPage);
 
   const mobileSearchButtonMaybe = showSearchForm ? (
     <Button
@@ -431,6 +462,18 @@ const TopbarComponent = props => {
         sendVerificationEmailInProgress={sendVerificationEmailInProgress}
         sendVerificationEmailError={sendVerificationEmailError}
       />
+
+      {showMobileBottomNav ? (
+        <MobileBottomNav
+          isAuthenticated={isAuthenticated}
+          currentPage={resolvedCurrentPage}
+          notificationCount={notificationCount}
+          inboxTab={topbarInboxTab}
+          showCreateListingsLink={
+            mounted ? showCreateListingsLink : showCreateListingLinkForUser(config, null)
+          }
+        />
+      ) : null}
 
       <GenericError show={showGenericError} />
     </div>

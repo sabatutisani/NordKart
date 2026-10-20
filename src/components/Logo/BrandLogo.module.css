@@ -1,0 +1,31 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  background-color: var(--colorNavy);
+}
+
+.wordmark {
+  font-family: var(--fontFamily);
+  font-size: 20px;
+  line-height: 1;
+  font-weight: var(--fontWeightHeavy);
+  letter-spacing: -0.03em;
+  color: var(--colorNavy);
+}
+
+.inverted .wordmark {
+  color: var(--colorWhite);
+}
+
+.inverted .mark {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}

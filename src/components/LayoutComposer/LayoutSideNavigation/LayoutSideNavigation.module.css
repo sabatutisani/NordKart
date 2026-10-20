@@ -30,6 +30,8 @@
   @media (--viewportLarge) {
     flex-direction: row;
     justify-content: center;
+    /* Nordkart: soft background behind the side navigation column */
+    background-color: var(--colorNavySoft);
   }
 }
 
@@ -51,7 +53,7 @@
     background-color: var(--colorWhite);
     border-left-width: 1px;
     border-left-style: solid;
-    border-left-color: var(--colorGrey100);
+    border-left-color: var(--colorBorder);
 
     scroll-margin-top: var(--topbarHeightDesktop);
   }

@@ -5,13 +5,15 @@ import classNames from 'classnames';
 
 import { useConfiguration } from '../../context/configurationContext';
 
-import { useIntl } from '../../util/reactIntl';
+import { FormattedMessage, useIntl } from '../../util/reactIntl';
 import { requireListingImage } from '../../util/configHelpers';
+import { getListingCountryCode } from '../../util/countries';
 import { lazyLoadWithDimensions } from '../../util/uiHelpers';
 import { createSlug } from '../../util/urlHelpers';
 
 import {
   AspectRatioWrapper,
+  Flag,
   NamedLink,
   ResponsiveImage,
   ListingCardThumbnail,
@@ -140,6 +142,9 @@ export const ListingCard = props => {
     variantPrefix = 'listing-card',
   } = config.layout.listingImage;
 
+  // Nordkart: country badge on top of the image (listing field 'country')
+  const countryCode = getListingCountryCode(listing);
+
   // Sets the listing as active in the search map when hovered (if the search map is enabled)
   const setActivePropsMaybe = setActiveListing
     ? {
@@ -155,40 +160,65 @@ export const ListingCard = props => {
       params={{ id, slug }}
       ariaLabel={cardAriaLabel}
     >
-      {showListingImage ? (
-        <ListingCardImage
-          renderSizes={renderSizes}
-          title={titlePlain}
-          listing={listing}
-          setActivePropsMaybe={setActivePropsMaybe}
-          aspectWidth={aspectWidth}
-          aspectHeight={aspectHeight}
-          variantPrefix={variantPrefix}
-          aspectRatioClassName={aspectRatioClassName}
-          lazyLoadImage={lazyLoadImage}
-        />
-      ) : (
-        <ListingCardThumbnail
-          style={cardStyle}
-          listingTitle={title}
-          className={aspectRatioClassName}
-          width={aspectWidth}
-          height={aspectHeight}
-          setActivePropsMaybe={setActivePropsMaybe}
-        />
-      )}
-      <div className={css.info}>
-        {showPrice ? (
-          <div className={css.price} title={priceTooltip}>
-            {priceMessage}
-          </div>
+      <div className={css.imageBox}>
+        {showListingImage ? (
+          <ListingCardImage
+            renderSizes={renderSizes}
+            title={titlePlain}
+            listing={listing}
+            setActivePropsMaybe={setActivePropsMaybe}
+            aspectWidth={aspectWidth}
+            aspectHeight={aspectHeight}
+            variantPrefix={variantPrefix}
+            aspectRatioClassName={aspectRatioClassName}
+            lazyLoadImage={lazyLoadImage}
+          />
+        ) : (
+          <ListingCardThumbnail
+            style={cardStyle}
+            listingTitle={title}
+            className={aspectRatioClassName}
+            width={aspectWidth}
+            height={aspectHeight}
+            setActivePropsMaybe={setActivePropsMaybe}
+          />
+        )}
+        {countryCode ? (
+          <span className={css.countryBadge}>
+            <Flag code={countryCode} size={16} />
+            <FormattedMessage id={`Countries.${countryCode}.name`} />
+          </span>
         ) : null}
-        <div className={css.mainInfo}>
+        <span className={css.viewBar} aria-hidden="true">
+          <FormattedMessage id="ListingCard.viewProduct" />
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M5 12h14M13 6l6 6-6 6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </div>
+      <div className={css.info}>
+        <div className={css.titleRow}>
           {showListingImage && (
             <div className={classNames(css.title, { [css.lightText]: darkMode })}>
               {titleFormatted}
             </div>
           )}
+          {showPrice ? (
+            <div
+              className={classNames(css.price, { [css.lightText]: darkMode })}
+              title={priceTooltip}
+            >
+              {priceMessage}
+            </div>
+          ) : null}
+        </div>
+        <div className={css.mainInfo}>
           {showAuthorInfo ? (
             <div className={classNames(css.authorInfo, { [css.lightText]: darkMode })}>
               {authorName}

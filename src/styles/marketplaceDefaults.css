@@ -35,18 +35,28 @@
 
   /* B&W and Grey palette */
 
+  /* Nordkart blue-grey palette */
   --colorWhite: hsl(0 0% 100%);
-  --colorGrey50: hsl(240 3% 98%);
-  --colorGrey100: hsl(240 3% 90%);
-  --colorGrey200: hsl(240 3% 80%);
-  --colorGrey300: hsl(240 3% 70%);
-  --colorGrey400: hsl(240 3% 60%);
-  --colorGrey500: hsl(240 3% 50%);
-  --colorGrey600: hsl(240 3% 40%);
-  --colorGrey700: hsl(240 3% 30%);
-  --colorGrey800: hsl(240 3% 20%);
-  --colorGrey900: hsl(240 3% 10%);
-  --colorBlack: hsl(0 0% 0%);
+  --colorGrey50: #f3f6fa;
+  --colorGrey100: #e3e8ef;
+  --colorGrey200: #d5dde8;
+  --colorGrey300: #a3afbf;
+  --colorGrey400: #7a8799;
+  --colorGrey500: #5a6b82;
+  --colorGrey600: #4a5b72;
+  --colorGrey700: #2a3d57;
+  --colorGrey800: #142a47;
+  --colorGrey900: #071d3a;
+
+  /* Nordkart brand colors */
+  --colorNavy: #071d3a;
+  --colorNavySoft: #f3f6fa;
+  --colorTextBody: #4a5b72;
+  --colorTextMuted: #5a6b82;
+  --colorBorder: #e3e8ef;
+  --colorBorderInput: #dce3ec;
+  /* Nordkart: the darkest color of the palette is navy (used for text and dark UI accents) */
+  --colorBlack: #071d3a;
 
   --colorLightTransparent: rgba(255, 255, 255, 0.65);
 
@@ -56,17 +66,17 @@
   * In the future, we are planning to bring more --marketplace* CSS Properties
   * from hosted assets, which means that they could be managed through Console.
   */
-  --marketplaceColor: #6938ef; /* hsl(256, 85%, 58%) */
-  --marketplaceColorLight: #4a12e2; /* hsl(256, 85%, 48%) */
-  --marketplaceColorDark: #8d68f3; /* hsl(256, 85%, 68% */
+  --marketplaceColor: #f5223a;
+  --marketplaceColorLight: #ff6b7c;
+  --marketplaceColorDark: #e01730;
 
   /** 
    * The fill color used by <PrimaryButton>
    * These might be overwritten by values from hosted assets
    */
-  --colorPrimaryButton: #138041;
-  --colorPrimaryButtonDark: #0d542a;
-  --colorPrimaryButtonLight: #1aad57;
+  --colorPrimaryButton: #f5223a;
+  --colorPrimaryButtonDark: #e01730;
+  --colorPrimaryButtonLight: #ff6b7c;
 
   /** 
    * The fill color used by <SecondaryButton>
@@ -83,8 +93,8 @@
   --colorStatusFinalState: var(--colorGrey600);
 
   /* ================ Font ================ */
-  --fontFamily: -apple-system, BlinkMacSystemFont, 'Inter', Helvetica, Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --fontFamily: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
   --fontWeightRegular: 400;
   --fontWeightMedium: 500;
@@ -102,25 +112,29 @@
    */
   --contentMaxWidth: 1056px;
   --contentMaxWidthPages: 1120px; /* calc(Global width (1056px) + (Horizontal padding (32px) * 2) */
+  /* Nordkart wide layout (landing page, topbar, footer) */
+  --contentMaxWidthWide: 1320px;
+  --pageGutter: clamp(20px, 4vw, 48px);
 
   /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
   --spacingUnit: 6px;
   --spacingUnitDesktop: 8px;
 
   /* Shadows */
-  --boxShadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  --boxShadowTop: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
-  --boxShadowLight: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-  --boxShadowPopup: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
-  --boxShadowPopupLight: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
-  --boxShadowBreakdown: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
-  --boxShadowButton: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  --boxShadowListingCard: 0 0 50px 0 rgba(0, 0, 0, 0.1);
-  --boxShadowFeaturedListingCard: 0 0 30px 0px rgba(0, 0, 0, 0.1);
-  --boxShadowNotFoundPageSearch: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  --boxShadowSectionLocationHover: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
-  --boxShadowBottomForm: 0 -2px 4px 0 rgba(0, 0, 0, 0.05);
-  --boxShadowFilterButton: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+  --boxShadow: 0 10px 30px -20px rgba(7, 29, 58, 0.25);
+  --boxShadowTop: 0 -8px 24px -16px rgba(7, 29, 58, 0.2);
+  --boxShadowLight: 0 6px 18px -12px rgba(7, 29, 58, 0.18);
+  --boxShadowPopup: 0 18px 40px -18px rgba(7, 29, 58, 0.35);
+  --boxShadowPopupLight: 0 12px 30px -12px rgba(7, 29, 58, 0.25);
+  --boxShadowBreakdown: 0 18px 40px -18px rgba(7, 29, 58, 0.25);
+  --boxShadowButton: 0 10px 24px -12px rgba(7, 29, 58, 0.35);
+  --boxShadowListingCard: 0 22px 40px -22px rgba(7, 29, 58, 0.45);
+  --boxShadowFeaturedListingCard: 0 22px 40px -22px rgba(7, 29, 58, 0.45);
+  --boxShadowNotFoundPageSearch: 0 20px 40px -24px rgba(7, 29, 58, 0.35);
+  --boxShadowSectionLocationHover: 0 22px 40px -22px rgba(7, 29, 58, 0.45);
+  --boxShadowBottomForm: 0 -8px 24px -16px rgba(7, 29, 58, 0.2);
+  --boxShadowFilterButton: 0 12px 30px -12px rgba(7, 29, 58, 0.3);
+  --boxShadowFocusRing: 0 0 0 5px rgba(7, 29, 58, 0.07);
 
   /* ================ Z-index base levels ================ */
 
@@ -135,13 +149,16 @@
 
   /* ================ Border radius ================ */
 
-  --borderRadius: 2px;
-  --borderRadiusMedium: 4px;
+  --borderRadius: 10px;
+  --borderRadiusMedium: 12px;
+  --borderRadiusLarge: 16px;
+  --borderRadiusXLarge: 20px;
 
   /* ================ Transition styles ================ */
 
   --transitionStyle: ease-in 0.2s;
-  --transitionStyleButton: ease-in-out 0.1s;
+  --transitionStyleButton: ease-in-out 0.15s;
+  --transitionEaseOut: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   /* ================ Topbar related ================ */
 
@@ -164,7 +181,7 @@
 
   /* ================ DatePicker ================ */
   --datepickerFgColor: var(--colorWhite);
-  --datepickerBgColor: var(--marketplaceColor);
+  --datepickerBgColor: var(--colorNavy);
   --datepickerBorderColor: var(--colorGrey50);
   --datepickerDisabledFgColor: var(--marketplaceColorDark);
   --datepickerDisabledTextDeco: unset;
@@ -176,7 +193,7 @@
   --datepickerDateOutline: white solid 1px;
   --datepickerButtonOutlineColor: var(--colorGrey50);
   --datepickerSelectedFgColor: var(--colorWhite);
-  --datepickerSelectedBgColor: var(--colorSuccess);
+  --datepickerSelectedBgColor: var(--marketplaceColor);
   --datepickerSelectedHoveredFgColor: inherit;
   --datepickerSelectedHoveredBgColor: rgba(255, 255, 255, 0.2);
 
@@ -187,7 +204,7 @@
   --TabNav_linkWidth: 240px;
 
   /* ================ Inputs, textareas and selects ================ */
-  --borderErrorField: 1px solid var(--colorFail);
+  --borderErrorField: 1.5px solid var(--colorFail);
 
   /* ================ LandingPage ================ */
   --LandingPage_sectionMarginTop: 40px;
@@ -221,7 +238,17 @@ body {
   text-rendering: optimizeSpeed;
   font-optical-sizing: auto;
 
-  background-color: var(--colorGrey50);
+  background-color: var(--colorWhite);
+  color: var(--colorNavy);
+}
+
+/* Reserve space for the floating MobileBottomNav on small screens */
+body.hasMobileBottomNav {
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+
+  @media (--viewportMedium) {
+    padding-bottom: 0;
+  }
 }
 
 ::selection {
@@ -256,13 +283,15 @@ a {
   border: none;
 
   /* Colors */
-  color: var(--marketplaceColor);
+  color: var(--colorNavy);
 
   /* Text size should be inherited */
   text-decoration: none;
+  transition: color var(--transitionStyleButton);
 }
 a:hover {
-  text-decoration: underline;
+  color: var(--marketplaceColor);
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -415,7 +444,7 @@ pre {
 
 html {
   /* font is set earlier */
-  color: var(--colorGrey700);
+  color: var(--colorNavy);
   padding: 0;
   margin: 0;
 }
@@ -487,8 +516,8 @@ select {
   background-color: #fff;
 
   /* Borders */
-  border-radius: 6px;
-  border: 1px solid #d8dce6;
+  border-radius: var(--borderRadiusMedium);
+  border: 1.5px solid var(--colorBorderInput);
   outline: none;
 
   /* Transition */
@@ -505,7 +534,7 @@ select {
   background-size: 8px 14px;
 
   &::placeholder {
-    color: var(--colorGrey300);
+    color: var(--colorGrey400);
   }
 
   @media (--viewportMedium) {
@@ -517,13 +546,13 @@ select {
 }
 /* Effects */
 select:hover {
-  border: 1px solid #b8bfd1;
+  border: 1.5px solid var(--colorGrey300);
   transition: all ease-in-out 100ms;
 }
 select:focus {
   background-color: #fff;
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  border-color: var(--colorNavy);
+  box-shadow: var(--boxShadowFocusRing);
   transition: all ease-in-out 100ms;
 }
 select:disabled {
@@ -548,15 +577,15 @@ textarea {
   background-color: #fff;
 
   /* Borders */
-  border-radius: 6px;
-  border: 1px solid #d8dce6;
+  border-radius: var(--borderRadiusMedium);
+  border: 1.5px solid var(--colorBorderInput);
   outline: none;
 
   /* Transition */
   transition: all ease-in-out 100ms;
 
   &::placeholder {
-    color: var(--colorGrey300);
+    color: var(--colorGrey400);
   }
 
   @media (--viewportMedium) {
@@ -568,14 +597,14 @@ textarea {
 /* Effects */
 input:hover,
 textarea:hover {
-  border: 1px solid #b8bfd1;
+  border: 1.5px solid var(--colorGrey300);
   transition: all ease-in-out 100ms;
 }
 input:focus,
 textarea:focus {
   background-color: #fff;
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  border-color: var(--colorNavy);
+  box-shadow: var(--boxShadowFocusRing);
   transition: all ease-in-out 100ms;
 }
 input:disabled,
@@ -615,13 +644,15 @@ textarea {
   border: none;
 
   /* Colors */
-  color: var(--marketplaceColor);
+  color: var(--colorNavy);
 
   /* Text size should be inherited */
   text-decoration: none;
+  transition: color var(--transitionStyleButton);
 }
 .a:hover {
-  text-decoration: underline;
+  color: var(--marketplaceColor);
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -737,6 +768,43 @@ textarea {
     margin-top: 8px;
     margin-bottom: 8px;
   }
+}
+
+/* Nordkart heading look: heavy, tight and navy */
+h1,
+h2,
+h3,
+.h1,
+.h2,
+.h3 {
+  color: var(--colorNavy);
+  font-weight: var(--fontWeightHeavy);
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+h4,
+h5,
+.h4,
+.h5 {
+  color: var(--colorNavy);
+  letter-spacing: -0.01em;
+}
+
+h6,
+.h6 {
+  color: var(--colorTextMuted);
+  letter-spacing: 0.08em;
+}
+
+/* Small uppercase label above section titles, e.g. "FEATURED THIS WEEK" */
+.eyebrow {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: var(--fontWeightBold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--marketplaceColor);
 }
 
 .label {
@@ -899,15 +967,15 @@ textarea {
   background-color: #fff;
 
   /* Borders */
-  border-radius: 6px;
-  border: 1px solid #d8dce6;
+  border-radius: var(--borderRadiusMedium);
+  border: 1.5px solid var(--colorBorderInput);
   outline: none;
 
   /* Transition */
   transition: all ease-in-out 100ms;
 
   &::placeholder {
-    color: var(--colorGrey300);
+    color: var(--colorGrey400);
   }
 
   @media (--viewportMedium) {
@@ -918,13 +986,13 @@ textarea {
 }
 /* Effects */
 .marketplaceInputStyles:hover {
-  border: 1px solid #b8bfd1;
+  border: 1.5px solid var(--colorGrey300);
   transition: all ease-in-out 100ms;
 }
 .marketplaceInputStyles:focus {
   background-color: #fff;
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  border-color: var(--colorNavy);
+  box-shadow: var(--boxShadowFocusRing);
   transition: all ease-in-out 100ms;
 }
 .marketplaceInputStyles:disabled {
@@ -1018,6 +1086,13 @@ textarea {
   /* Default button uses marketplace color */
   background-color: var(--marketplaceColor);
   color: var(--colorWhite);
+}
+.buttonDefault:active,
+.buttonPrimary:active,
+.buttonPrimaryInline:active,
+.buttonSecondary:active,
+.buttonSecondaryInline:active {
+  transform: scale(0.97);
 }
 .buttonDefault:focus,
 .buttonDefault:hover {
@@ -1165,14 +1240,14 @@ textarea {
   text-decoration: none;
 
   /* Secondary button has clear borders */
-  border-width: 1px;
+  border-width: 1.5px;
   border-style: solid;
-  border-color: var(--colorGrey100);
+  border-color: var(--colorBorderInput);
   border-radius: var(--borderRadiusMedium);
 
   /* Button colors: secondary */
   background-color: var(--colorSecondaryButton);
-  color: var(--colorGrey700);
+  color: var(--colorNavy);
 
   @media (--viewportMedium) {
     padding: 20px 0 20px 0;
@@ -1182,7 +1257,7 @@ textarea {
 .buttonSecondary:hover {
   outline: none;
   box-shadow: var(--boxShadowButton);
-  border-color: var(--colorGrey300);
+  border-color: var(--colorNavy);
   background-color: var(--colorSecondaryButton);
 }
 .buttonSecondary:hover {
@@ -1228,14 +1303,14 @@ textarea {
   text-decoration: none;
 
   /* Secondary button has clear borders */
-  border-width: 1px;
+  border-width: 1.5px;
   border-style: solid;
-  border-color: var(--colorGrey100);
+  border-color: var(--colorBorderInput);
   border-radius: var(--borderRadiusMedium);
 
   /* Button colors: secondary */
   background-color: var(--colorSecondaryButton);
-  color: var(--colorGrey700);
+  color: var(--colorNavy);
 
   @media (--viewportMedium) {
     height: 40px;
@@ -1245,7 +1320,7 @@ textarea {
 .buttonSecondaryInline:hover {
   outline: none;
   box-shadow: var(--boxShadowButton);
-  border-color: var(--colorGrey300);
+  border-color: var(--colorNavy);
   background-color: var(--colorSecondaryButton);
 }
 .buttonSecondaryInline:hover {
@@ -1276,7 +1351,7 @@ textarea {
 
   /* Borders */
   border-radius: var(--borderRadius);
-  border: 1px solid var(--colorGrey100);
+  border: 1px solid var(--colorBorderInput);
   background: var(--colorWhite);
 
   cursor: pointer;
@@ -1288,8 +1363,8 @@ textarea {
 }
 .buttonSmall:focus,
 .buttonSmall:hover {
-  background-color: var(--marketplaceColor);
-  border-color: var(--marketplaceColor);
+  background-color: var(--colorNavy);
+  border-color: var(--colorNavy);
   color: var(--colorWhite);
 }
 
@@ -1328,7 +1403,7 @@ textarea {
   padding: var(--modalPadding);
 
   background-color: var(--colorWhite);
-  border-radius: var(--borderRadius);
+  border-radius: var(--borderRadiusXLarge);
   border-bottom: none;
 
   @media (--viewportMedium) {
@@ -1338,7 +1413,7 @@ textarea {
     padding: var(--modalPaddingMedium);
     margin-top: 12.5vh;
     margin-bottom: 12.5vh;
-    border-bottom: 8px solid var(--marketplaceColor);
+    box-shadow: var(--boxShadowPopup);
   }
 }
 
@@ -1369,13 +1444,15 @@ textarea {
 
 /* Modal title */
 .marketplaceModalTitleStyles {
-  font-weight: var(--fontWeightBold);
+  font-weight: var(--fontWeightHeavy);
   font-size: 30px;
   line-height: 36px;
+  letter-spacing: -0.035em;
+  color: var(--colorNavy);
   margin: 0;
 
   @media (--viewportMedium) {
-    font-weight: var(--fontWeightBold);
+    font-weight: var(--fontWeightHeavy);
     line-height: 40px;
     margin: 0;
   }

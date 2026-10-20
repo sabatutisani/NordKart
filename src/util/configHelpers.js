@@ -238,14 +238,25 @@ const mergeBranding = (brandingConfig, defaultBranding) => {
     ...rest
   } = brandingConfig || {};
 
-  const marketplaceColor = marketplaceColors?.mainColor || defaultBranding.marketplaceColor;
-  const marketplaceColorDark = marketplaceColor ? hexToCssHsl(marketplaceColor, -10) : null;
-  const marketplaceColorLight = marketplaceColor ? hexToCssHsl(marketplaceColor, 10) : null;
+  // Nordkart: brand colors are locked to the local configBranding.js values.
+  // The marketplaceColors set in Console (hosted branding asset) are intentionally ignored,
+  // so that the design can't be changed accidentally from Console.
+  const marketplaceColor = defaultBranding.marketplaceColor;
+  const marketplaceColorDark =
+    defaultBranding.marketplaceColorDark ||
+    (marketplaceColor ? hexToCssHsl(marketplaceColor, -10) : null);
+  const marketplaceColorLight =
+    defaultBranding.marketplaceColorLight ||
+    (marketplaceColor ? hexToCssHsl(marketplaceColor, 10) : null);
 
   // The 'marketplaceColor' has a special status for branding. Other colors are just prefixed with "color".
-  const colorPrimaryButton = marketplaceColors?.primaryButton;
-  const colorPrimaryButtonDark = colorPrimaryButton ? hexToCssHsl(colorPrimaryButton, -10) : null;
-  const colorPrimaryButtonLight = colorPrimaryButton ? hexToCssHsl(colorPrimaryButton, 10) : null;
+  const colorPrimaryButton = defaultBranding.colorPrimaryButton;
+  const colorPrimaryButtonDark =
+    defaultBranding.colorPrimaryButtonDark ||
+    (colorPrimaryButton ? hexToCssHsl(colorPrimaryButton, -10) : null);
+  const colorPrimaryButtonLight =
+    defaultBranding.colorPrimaryButtonLight ||
+    (colorPrimaryButton ? hexToCssHsl(colorPrimaryButton, 10) : null);
 
   const logoSettingsRaw = logoSettings || defaultBranding.logoSettings;
   const validLogoSettings =
@@ -266,6 +277,7 @@ const mergeBranding = (brandingConfig, defaultBranding) => {
     logoSettings: validLogoSettings ? logoSettingsRaw : { format: 'image', height: 24 },
     logoImageDesktop: logo || defaultBranding.logoImageDesktopURL,
     logoImageMobile: logo || defaultBranding.logoImageMobileURL,
+    useHostedLogo: !!defaultBranding.useHostedLogo,
     brandImage: loginBackgroundImage,
     facebookImage,
     twitterImage,

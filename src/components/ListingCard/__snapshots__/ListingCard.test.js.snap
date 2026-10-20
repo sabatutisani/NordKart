@@ -7,38 +7,68 @@ exports[`ListingCard matches snapshot 1`] = `
   href="/l/listing1-title/listing1"
 >
   <div
-    class="root aspectRatioWrapper"
+    class="imageBox"
   >
     <div
-      class="aspectPadding"
-      style="padding-bottom: 100%;"
+      class="root aspectRatioWrapper"
     >
       <div
-        class="aspectBox"
+        class="aspectPadding"
+        style="padding-bottom: 100%;"
       >
         <div
-          style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px;"
-        />
+          class="aspectBox"
+        >
+          <div
+            style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px;"
+          />
+        </div>
       </div>
     </div>
+    <span
+      aria-hidden="true"
+      class="viewBar"
+    >
+      <span>
+        ListingCard.viewProduct
+      </span>
+      <svg
+        fill="none"
+        height="18"
+        viewBox="0 0 24 24"
+        width="18"
+      >
+        <path
+          d="M5 12h14M13 6l6 6-6 6"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+      </svg>
+    </span>
   </div>
   <div
     class="info"
   >
     <div
-      class="price"
-      title="55"
-    >
-      ListingCard.price
-    </div>
-    <div
-      class="mainInfo"
+      class="titleRow"
     >
       <div
         class="title"
       >
         listing1 title
       </div>
+      <div
+        class="price"
+        title="55"
+      >
+        ListingCard.price
+      </div>
+    </div>
+    <div
+      class="mainInfo"
+    >
       <div
         class="authorInfo"
       >
@@ -56,32 +86,62 @@ exports[`ListingCard matches snapshot without price 1`] = `
   href="/l/listing1-title/listing1"
 >
   <div
-    class="root aspectRatioWrapper"
+    class="imageBox"
   >
     <div
-      class="aspectPadding"
-      style="padding-bottom: 100%;"
+      class="root aspectRatioWrapper"
     >
       <div
-        class="aspectBox"
+        class="aspectPadding"
+        style="padding-bottom: 100%;"
       >
         <div
-          style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px;"
-        />
+          class="aspectBox"
+        >
+          <div
+            style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px;"
+          />
+        </div>
       </div>
     </div>
+    <span
+      aria-hidden="true"
+      class="viewBar"
+    >
+      <span>
+        ListingCard.viewProduct
+      </span>
+      <svg
+        fill="none"
+        height="18"
+        viewBox="0 0 24 24"
+        width="18"
+      >
+        <path
+          d="M5 12h14M13 6l6 6-6 6"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+      </svg>
+    </span>
   </div>
   <div
     class="info"
   >
     <div
-      class="mainInfo"
+      class="titleRow"
     >
       <div
         class="title"
       >
         listing1 title
       </div>
+    </div>
+    <div
+      class="mainInfo"
+    >
       <div
         class="authorInfo"
       >

@@ -4,34 +4,101 @@
   /* Layout */
   display: flex;
   flex-direction: column;
+  color: var(--colorNavy);
 
   /* Remove link's hover effect */
   &:hover {
     text-decoration: none;
+    color: var(--colorNavy);
   }
 }
 
-.aspectRatioWrapper {
-  transition: var(--transitionStyleButton);
-  background: var(--colorGrey100); /* Loading BG color */
-  border-radius: var(--borderRadiusMedium);
+/* Image area with badges. Lifts on hover. */
+.imageBox {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background-color: #eef2f6;
+  transform: translateZ(0);
+  transition: transform 0.35s var(--transitionEaseOut), box-shadow 0.35s var(--transitionEaseOut);
 
   @media (--viewportMedium) {
-    &:hover {
-      transform: scale(1.02);
+    .root:hover & {
+      transform: translateY(-4px);
       box-shadow: var(--boxShadowListingCard);
     }
   }
 }
 
-.rootForImage {
-  border: solid 1px var(--colorGrey100);
-  border-radius: var(--borderRadiusMedium);
-  width: 100%;
-  height: 100%;
+.aspectRatioWrapper {
+  background: #eef2f6; /* Loading BG color */
+  border-radius: 18px;
+  overflow: hidden;
 }
 
-.title.lightText {
+.rootForImage {
+  border-radius: 18px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--transitionEaseOut);
+
+  @media (--viewportMedium) {
+    .root:hover & {
+      transform: scale(1.045);
+    }
+  }
+}
+
+.countryBadge {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px 6px 6px;
+  border-radius: 9px;
+  background-color: rgba(255, 255, 255, 0.95);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var(--fontWeightBold);
+  color: var(--colorNavy);
+  pointer-events: none;
+}
+
+/* "View product" bar that slides up on hover */
+.viewBar {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  height: 46px;
+  border-radius: 12px;
+  background-color: var(--colorNavy);
+  color: var(--colorWhite);
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: var(--fontWeightSemiBold);
+  transform: translateY(70px);
+  transition: transform 0.35s var(--transitionEaseOut);
+  pointer-events: none;
+
+  @media (--viewportMedium) {
+    display: flex;
+
+    .root:hover &,
+    .root:focus-visible & {
+      transform: translateY(0);
+    }
+  }
+}
+
+.title.lightText,
+.price.lightText {
   color: var(--colorWhite);
 }
 
@@ -43,23 +110,33 @@
   /* Layout */
   display: flex;
   flex-direction: column;
+  gap: 4px;
   /* ⚠️ padding width is hardcoded in SectionListings.js calculateCarouselHeight() as cardInfoPadding*/
-  padding: 14px 0 2px 0;
+  padding: 14px 2px 2px 2px;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
 }
 
 /* ⚠️ the total calculated height of this selector is hardcoded in SectionListings.js calculateCarouselHeight() as priceHeight*/
 .price {
-  composes: textSmall from global;
   /* Layout */
   flex-shrink: 0;
-  margin-bottom: 4px;
-  color: var(--colorGrey700);
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: var(--fontWeightHeavy);
+  white-space: nowrap;
+  color: var(--colorNavy);
 }
 
 .priceValue {
   /* Font */
-  font-weight: var(--fontWeightSemiBold);
-  color: var(--marketplaceColor);
+  font-weight: var(--fontWeightHeavy);
+  color: var(--colorNavy);
 
   /* Remove default margins from font */
   margin-top: 0;
@@ -73,8 +150,9 @@
 
 .perUnit {
   /* Font */
+  font-size: 13px;
   font-weight: var(--fontWeightSemiBold);
-  color: var(--marketplaceColor);
+  color: var(--colorTextMuted);
 
   /* Remove default margins from font */
   margin-top: 0;
@@ -94,30 +172,29 @@
 /* ⚠️ the calculated height of this selector is hardcoded in SectionListings.js calculateCarouselHeight() as titleHeightSingleLine */
 .title {
   /* Font */
-  composes: textSmall from global;
+  font-size: 16px;
+  line-height: 22px;
   font-weight: var(--fontWeightBold);
-  color: var(--colorGrey700);
+  letter-spacing: -0.01em;
+  color: var(--colorNavy);
   margin: 0;
+  min-width: 0;
 }
 
 /* ⚠️ the calculated height of this selector is hardcoded in SectionListings.js calculateCarouselHeight() as authorInfoHeight & authorInfoHeighMobile */
 .authorInfo {
   /* Font */
-  composes: marketplaceTinyFontStyles from global;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: var(--fontWeightMedium);
-  color: var(--colorGrey700);
+  color: var(--colorTextMuted);
 
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
 
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
-
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
 }
 
 .longWord {

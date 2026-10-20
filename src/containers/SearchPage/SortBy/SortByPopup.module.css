@@ -12,11 +12,13 @@
 }
 
 .menuContent {
-  margin-top: 7px;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  margin-top: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   min-width: 300px;
-  border-radius: var(--borderRadiusMedium);
+  border: 1px solid var(--colorBorder);
+  border-radius: var(--borderRadiusLarge);
+  overflow: hidden;
 }
 
 /* left animated "border" like hover element */
@@ -36,8 +38,9 @@
   top: 2px;
   left: 0px;
   height: calc(100% - 7px);
-  width: 6px;
-  background-color: var(--colorBlack);
+  width: 4px;
+  border-radius: 0 3px 3px 0;
+  background-color: var(--marketplaceColor);
 }
 
 .menuHeading {
@@ -71,7 +74,7 @@
   }
 
   &:hover .menuItemBorder {
-    width: 6px;
+    width: 4px;
   }
 
   &:disabled {
